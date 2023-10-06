@@ -1,7 +1,7 @@
 import Card from "../components/atom/Card"
 import Container from "../components/atom/Container"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -48,6 +48,9 @@ const Login = () => {
   return (
     <Container>
       <Card customCss="mx-auto my-2">
+        <div className="border-b border-gray-200 pb-2 mb-2">
+          <h3 className="text-base font-semibold leading-6 text-gray-900">Login</h3>
+        </div>
         <div className="mx-auto max-w-sm">
           <label
            htmlFor="email"
@@ -109,7 +112,7 @@ const Login = () => {
           </div>
           <div className=" flex justify-center">
             <button type="button" onClick={handleLogin} className=" flex w-full items-center justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ">
-              click me
+              Login
             </button>
           </div>
         </div>

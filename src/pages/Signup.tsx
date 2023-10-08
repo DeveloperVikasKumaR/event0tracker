@@ -2,33 +2,35 @@ import Card from "../components/atom/Card"
 import Container from "../components/atom/Container"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
 import {useState} from 'react'
+import axios from "axios"
 
 const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword ] = useState('')
+  console.log(import.meta.env.VITE_BASE_URL)
   const [name, setName ] = useState('')
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('')
-  const [invalidPasswordError, setInvalidPasswordError] = useState('')
-  const [invalidEmailError, setInvalidEmailError] = useState('')
-  const [invalidUsernameError, setInvalidUsernameError] = useState('')
-  const [invalidPhoneError, setInvalidPhoneError] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword ] = useState('')
   const [invalidNameError, setInvalidNameError] = useState('')
+  const [invalidEmailError, setInvalidEmailError] = useState('')
+  const [invalidPhoneError, setInvalidPhoneError] = useState('')
+  const [invalidUsernameError, setInvalidUsernameError] = useState('')
+  const [invalidPasswordError, setInvalidPasswordError] = useState('')
   
+  const handleNameChange = (ev: any) => {
+    setName(ev.target.value)
+  }
   const handleEmailChange = (ev: any) => {
     setEmail(ev.target.value)
   }
-  const handlePasswordChange = (ev: any) => {
-    setPassword(ev.target.value)
-  }
-  const handleNameChange = (ev: any) => {
-    setName(ev.target.value)
+  const handlePhoneChange = (ev: any) => {
+    setPhone(ev.target.value)
   }
   const handleUsernameChange = (ev: any) => {
     setUsername(ev.target.value)
   }
-  const handlePhoneChange = (ev: any) => {
-    setPhone(ev.target.value)
+  const handlePasswordChange = (ev: any) => {
+    setPassword(ev.target.value)
   }
   const resetErrorMsgs = ()=>{
     setInvalidNameError('')
@@ -78,12 +80,22 @@ const Signup = () => {
       return
     }
     
-    
-    
+    // API call
+    axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/register`,{
+      name: name,
+      email: email,
+      phone : phone,
+      username : username,
+      password : password
+    })
+    .then((response) => {
+      console.log(response)
+    })
     
   }
  
   return (
+    
     <Container>
       <Card customCss="mx-auto my-2">
         <div className="border-b border-gray-200 pb-2 mb-2">

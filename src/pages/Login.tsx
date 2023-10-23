@@ -4,34 +4,31 @@ import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
 import {useState} from 'react'
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('')
   const [password, setPassword ] = useState('')
-  const [invalidEmailError, setInvalidEmailError] = useState('')
+  const [invalidUsernameError, setInvalidUsernameError] = useState('')
   const [invalidPasswordError, setInvalidPasswordError] = useState('')
   
-  const handleEmailChange = (ev: any) => {
-    setEmail(ev.target.value)
+  
+  const handleUsernameChange = (ev: any) => {
+    setUsername(ev.target.value)
   }
   const handlePasswordChange = (ev: any) => {
     setPassword(ev.target.value)
   }
   const resetErrorMsgs = ()=>{
-    setInvalidEmailError('')
+    setInvalidUsernameError('')
     setInvalidPasswordError('')
   }
   const handleLogin = () => {
     resetErrorMsgs()
 
-    if(email.length == 0){
-      setInvalidEmailError('Empty Email')
-      return
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)){
-      setInvalidEmailError('wrong format')
-      return
-    }
     
+    const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{1,29}$/;
+    if(!usernameRegex.test(username)){
+      setInvalidUsernameError('Invalid Username')
+      return
+    }
     if(password.length == 0){
       setInvalidPasswordError('Empty Password')
       return
@@ -52,32 +49,32 @@ const Login = () => {
           <h3 className="text-base font-semibold leading-6 text-gray-900">Login</h3>
         </div>
         <div className="mx-auto max-w-sm">
-          <label
-           htmlFor="email"
-           className="block text-sm font-medium leading-6 text-gray-900">
-            Email
+        <label
+             htmlFor="username"
+             className="block text-sm font-medium leading-6 text-gray-900">
+             Username
           </label>
           <div className="relative mt-2 rounded-md shadow-sm">
             <input
-             type="email"
-             name="email"
-             id="email"
-             className= {` ${invalidEmailError ? "  placeholder: text-red-500 focus: ring-red-500" : ""} block w-full rounded-md border-0 py-1.5 pr-10 ring-1 p-2 placeholder:`}
-             placeholder="Email"
-             value={email}
-             aria-onInvalid="true"
-             aria-describedby="email-error"
-             onChange={handleEmailChange}
+             type="text"
+             name="Password"
+             id="password"
+             className= {` ${invalidUsernameError ? "placeholder: text-red-500 focus: ring-red-500" : ""} block w-full mb-2 rounded-md border-0 py-1.5 pr-10 ring-1 p-2 placeholder:`}
+             placeholder="Username"
+             value={username}
+            //  aria-onInvalid="true"
+             aria-describedby="username-error"
+             onChange={handleUsernameChange}
             />
-            {invalidEmailError &&(
+            {invalidUsernameError &&(
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ExclamationCircleIcon className="h-5 w-5 text-red-500"
                aria-hidden="true" />
-              </div>
+            </div>
             )}
-            {invalidEmailError && (
-              <p className=" mt-2 text-sm text-red-600" id="email-error">
-                {invalidEmailError}
+            {invalidUsernameError && (
+              <p className=" mt-2 text-sm text-red-600" id="password-error">
+                {invalidUsernameError}
               </p>
             )}
           </div>
@@ -94,7 +91,7 @@ const Login = () => {
              className= {` ${invalidPasswordError ? "placeholder: text-red-500 focus: ring-red-500" : ""} block w-full mb-2 rounded-md border-0 py-1.5 pr-10 ring-1 p-2 placeholder:`}
              placeholder="Password"
              value={password}
-             aria-onInvalid="true"
+            //  aria-onInvalid="true"
              aria-describedby="password-error"
              onChange={handlePasswordChange}
             />

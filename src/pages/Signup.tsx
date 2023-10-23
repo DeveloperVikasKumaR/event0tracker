@@ -41,7 +41,7 @@ const Signup = () => {
   }
 
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     resetErrorMsgs()
 
     if (name.length == 0) {
@@ -256,7 +256,7 @@ const Signup = () => {
           
           
           <div className=" flex justify-center">
-            <button type="button" onClick={handleLogin} className=" flex w-full items-center justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ">
+            <button type="button" onClick={handleSignup} className=" flex w-full items-center justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ">
               Sign Up
             </button>
           </div>

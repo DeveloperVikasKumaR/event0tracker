@@ -3,9 +3,10 @@ import Container from "../components/atom/Container"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
 import {useState} from 'react'
 import axios from "axios"
+import AppAlert from "../utility/AppAlert"
 
 const Signup = () => {
-  console.log(import.meta.env.VITE_BASE_URL)
+  const appAlert = AppAlert()
   const [name, setName ] = useState('')
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('')
@@ -40,45 +41,45 @@ const Signup = () => {
     setInvalidPasswordError('')
   }
 
-
   const handleSignup = () => {
     resetErrorMsgs()
+    // appAlert?.showAlert({message:'signup failed' , type : 'WARNING' , duration : 1000})
 
-    if (name.length == 0) {
-      setInvalidNameError('Empty Name')
-      return
-    }
-    if (name.length > 50) {
-      setInvalidNameError('Max Length Should Be 50 Characters')
-      return
-    }
-    if(email.length == 0){
-      setInvalidEmailError('Empty Email')
-      return
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)){
-      setInvalidEmailError('wrong format')
-      return
-    }
-    if(phone?.toString().length != 10){
-      setInvalidPhoneError('Invalid Phone Number')
-      return
-    }
-    const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{1,29}$/;
-    if(!usernameRegex.test(username)){
-      setInvalidUsernameError('Invalid Username')
-      return
-    }
-    if(password.length == 0){
-      setInvalidPasswordError('Empty Password')
-      return
-    }
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if(!passwordRegex.test(password)){
-      setInvalidPasswordError('Invalid Password')
-      return
-    }
+    // if (name.length == 0) {
+    //   setInvalidNameError('Empty Name')
+    //   return
+    // }
+    // if (name.length > 50) {
+    //   setInvalidNameError('Max Length Should Be 50 Characters')
+    //   return
+    // }
+    // if(email.length == 0){
+    //   setInvalidEmailError('Empty Email')
+    //   return
+    // }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (!emailRegex.test(email)){
+    //   setInvalidEmailError('wrong format')
+    //   return
+    // }
+    // if(phone?.toString().length != 10){
+    //   setInvalidPhoneError('Invalid Phone Number')
+    //   return
+    // }
+    // const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{1,29}$/;
+    // if(!usernameRegex.test(username)){
+    //   setInvalidUsernameError('Invalid Username')
+    //   return
+    // }
+    // if(password.length == 0){
+    //   setInvalidPasswordError('Empty Password')
+    //   return
+    // }
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // if(!passwordRegex.test(password)){
+    //   setInvalidPasswordError('Invalid Password')
+    //   return
+    // }
     
     // API call
     axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/register`,{
@@ -90,8 +91,19 @@ const Signup = () => {
     })
     .then((response) => {
       console.log(response)
+      console.log(`hello`)
+      if(response.status == 201){
+        appAlert?.showAlert({message: 'New user Created', type : 'SUCCESS', duration : 3000})
+      }
     })
-    
+    .catch((error) => {
+      console.log(error)
+      console.log(error.response.status,error.response.data.error)
+      if(error.response.status == 400){
+        appAlert?.showAlert({message: error.response.data.error, type : 'ERROR', duration : 5000})
+      }
+    })
+
   }
  
   return (

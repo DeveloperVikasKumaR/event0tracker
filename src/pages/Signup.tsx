@@ -93,14 +93,16 @@ const Signup = () => {
       console.log(response)
       console.log(`hello`)
       if(response.status == 201){
-        appAlert?.showAlert({message: 'New user Created', type : 'SUCCESS', duration : 3000})
+        if (appAlert && appAlert.showAlert)
+        appAlert?.showAlert({message: "User Created", type: "SUCCESS", duration: 5000});
       }
     })
     .catch((error) => {
       console.log(error)
       console.log(error.response.status,error.response.data.error)
       if(error.response.status == 400){
-        appAlert?.showAlert({message: error.response.data.error, type : 'ERROR', duration : 5000})
+        if (appAlert && appAlert.showAlert)
+          appAlert?.showAlert({message: error.response.data.error, type: "ERROR", duration: 5000});
       }
     })
 

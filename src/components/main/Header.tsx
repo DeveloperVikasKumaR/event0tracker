@@ -1,7 +1,8 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Disclosure,} from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import Event0TrackerLogo from '../../assets/Event_0_Tracker.png'
+import { Link } from 'react-router-dom'
 
 const user = {
   name: 'Tom Cook',
@@ -10,10 +11,10 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Tech', href: '#', current: false },
+  { name: 'Movie', href: '#', current: false },
+  { name: 'Music', href: '#', current: false },
+  { name: 'Standup', href: '#', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -36,8 +37,8 @@ export default function Header() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    src={Event0TrackerLogo}
+                    alt="Event 0 Tracker Logo"
                   />
                 </div>
               </div>
@@ -82,8 +83,8 @@ export default function Header() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-4 flex-shrink-0">
+                {/* Profile dropdown only visible when user loggedin*/}
+                {/* <Menu as="div" className="relative ml-4 flex-shrink-0">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
@@ -118,7 +119,34 @@ export default function Header() {
                       ))}
                     </Menu.Items>
                   </Transition>
-                </Menu>
+                </Menu> */}
+
+                {/* user login and signup */}
+                <div>
+                  <Link
+                    // key={''}
+                    to={'/login'}
+                    className={classNames(
+                      false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'inline-flex items-center rounded-md py-2 px-3 text-sm font-medium'
+                    )}
+                    aria-current={true ? 'page' : undefined}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    // key={''}
+                    to={'/signup'}
+                    className={classNames(
+                      false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'inline-flex items-center rounded-md py-2 px-3 text-sm font-medium'
+                    )}
+                    aria-current={true ? 'page' : undefined}
+                  >
+                    Register
+                  </Link>
+                </div>
+                
               </div>
             </div>
             <nav className="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">

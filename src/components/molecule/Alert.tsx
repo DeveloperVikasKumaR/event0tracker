@@ -1,7 +1,6 @@
 import { CheckCircleIcon, ExclamationTriangleIcon, InformationCircleIcon, XCircleIcon } from '@heroicons/react/20/solid'
 import AppAlert from '../../utility/AppAlert'
 
-
 export default function Alert() {
   const appAlert = AppAlert();
 

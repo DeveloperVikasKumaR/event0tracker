@@ -9,7 +9,7 @@ const Signup = () => {
   const appAlert = AppAlert()
   const [name, setName ] = useState('')
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('')
+  const [phone, setPhone] = useState<number | ''>()
   const [username, setUsername] = useState('')
   const [password, setPassword ] = useState('')
   const [invalidNameError, setInvalidNameError] = useState('')
@@ -39,6 +39,13 @@ const Signup = () => {
     setInvalidPhoneError('')
     setInvalidUsernameError('')
     setInvalidPasswordError('')
+  }
+  const resetInputFields = function () {
+    setName('')
+    setEmail('')
+    setPhone('')
+    setUsername('')
+    setPassword('')
   }
 
   const handleSignup = () => {
@@ -93,8 +100,10 @@ const Signup = () => {
       console.log(response)
       console.log(`hello`)
       if(response.status == 201){
-        if (appAlert && appAlert.showAlert)
-        appAlert?.showAlert({message: "User Created", type: "SUCCESS", duration: 5000});
+        if (appAlert && appAlert.showAlert){
+          appAlert?.showAlert({message: "User Created", type: "SUCCESS", duration: 5000});
+          resetInputFields()
+        }
       }
     })
     .catch((error) => {

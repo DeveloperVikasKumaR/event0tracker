@@ -4,22 +4,21 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Event0TrackerLogo from '../../assets/Event_0_Tracker.png'
 import { Link } from 'react-router-dom'
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+// const user = {
+//   name: 'Tom Cook',
+//   email: 'tom@example.com',
+//   imageUrl:
+//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+// }
 const navigation = [
   { name: 'Tech', href: '#', current: false },
   { name: 'Movie', href: '#', current: false },
   { name: 'Music', href: '#', current: false },
   { name: 'Standup', href: '#', current: false },
 ]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+const userNavigationOnLogout = [
+  { name: 'Login', href: 'login' },
+  { name: 'Signup', href: 'signup' },
 ]
 
 function classNames(...classes:any) {
@@ -184,7 +183,7 @@ export default function Header() {
               ))}
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
-              <div className="flex items-center px-4">
+              {/* <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
                   <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
                 </div>
@@ -200,9 +199,9 @@ export default function Header() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-              </div>
+              </div> */}
               <div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
+                {/* {userNavigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
@@ -211,6 +210,11 @@ export default function Header() {
                   >
                     {item.name}
                   </Disclosure.Button>
+                ))} */}
+                {userNavigationOnLogout.map((item) => (
+                  <Link to={item.href} className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'>
+                    {item.name}
+                  </Link>
                 ))}
               </div>
             </div>
